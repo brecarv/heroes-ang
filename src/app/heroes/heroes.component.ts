@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { HeroService } from '../hero.service';
 import { Hero } from '../hero';
 import { HEROES } from '../mock-heroes';
@@ -22,7 +23,7 @@ export class HeroesComponent implements OnInit {
     this.selectedHero = hero;
   }
 
-  getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+  getHeroes(): Observable<Hero[]> {
+    this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
   }
 }
